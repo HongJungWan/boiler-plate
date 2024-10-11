@@ -10,6 +10,9 @@ func NewNetwork() *Network {
 	r := &Network{
 		engin: gin.New(),
 	}
+
+	newUserRouter(r)
+
 	return r
 }
 
