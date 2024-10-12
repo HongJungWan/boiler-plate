@@ -5,7 +5,19 @@ type User struct {
 	Age  int64  `json:"age"`
 }
 
-type UserResponse struct {
+type GetUserResponse struct {
 	*ApiResponse
 	*User
+}
+
+type CreateUserResponse struct {
+	*ApiResponse
+}
+
+type UpdateUserResponse struct {
+	*ApiResponse
+}
+
+type DeleteUserResponse struct {
+	*ApiResponse
 }
