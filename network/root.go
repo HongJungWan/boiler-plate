@@ -1,17 +1,21 @@
 package network
 
-import "github.com/gin-gonic/gin"
+import (
+	"boiler-plate/service"
+	"github.com/gin-gonic/gin"
+)
 
 type Network struct {
-	engin *gin.Engine
+	engin   *gin.Engine
+	service *service.Service
 }
 
-func NewNetwork() *Network {
+func NewNetwork(svc *service.Service) *Network {
 	r := &Network{
 		engin: gin.New(),
 	}
 
-	newUserRouter(r)
+	newUserRouter(r, svc.User)
 
 	return r
 }

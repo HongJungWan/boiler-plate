@@ -1,22 +1,26 @@
 package service
 
 import (
-	"google.golang.org/protobuf/compiler/protogen"
+	"boiler-plate/repository"
 	"sync"
 )
 
 var (
 	serviceInit     sync.Once
-	serviceInstance *protogen.Service
+	serviceInstance *Service
 )
 
 type Service struct {
-	// repository
+	repository *repository.Repository
+	User       *User
 }
 
-func NewService() *Service {
+func NewService(rep *repository.Repository) *Service {
 	serviceInit.Do(func() {
-		serviceInstance = &Service{}
+		serviceInstance = &Service{
+			repository: rep,
+		}
+		serviceInstance.User = newUserService(rep.User)
 	})
 
 	return serviceInstance
