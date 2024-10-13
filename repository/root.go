@@ -1,21 +1,23 @@
 package repository
 
 import (
-	"github.com/cloudwego/iasm/expr"
 	"sync"
 )
 
 var (
 	repositoryInit     sync.Once
-	repositoryInstance *expr.Repository
+	repositoryInstance *Repository
 )
 
 type Repository struct {
+	User *UserRepository
 }
 
 func NewRepository() *Repository {
 	repositoryInit.Do(func() {
-		repositoryInstance = &Repository{}
+		repositoryInstance = &Repository{
+			User: NewUserRepository(),
+		}
 	})
 
 	return repositoryInstance
